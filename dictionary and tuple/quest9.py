@@ -3,8 +3,8 @@ oldAge2={"name": "Aayush"}
 def oldAge(d):
     if "age" in d:
         age=d['age']+50
-        return age
+        print(age)
     else:
-        return 50
-print(oldAge(oldAge1))
-print(oldAge(oldAge2))
+        print("50")
+oldAge(oldAge1)
+oldAge(oldAge2)
