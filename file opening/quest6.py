@@ -8,10 +8,12 @@ class Student:
         f.write(f"{self.name} ")
         f.write(f"{self.roll_no} ")
         f.write(f"{self.course}\n")
+        f.close()
     def file_read(self):
         f=open("stuent.txt","r")
         data=f.readlines()
         print(data)
+        f.close()
 student1=Student("Anurag",100,"math")
 student2=Student("Arpit",101,"Hindi")
 student3=Student("Anand",102,"Science")
@@ -33,7 +35,11 @@ def replace_text(file_path,search_term,new_term,replace_all):
         data=data.replace(search_term,new_term)
     else:
         data=data.replace(search_term,new_term,1)
+    search_term=new_term
+    coun = data.count(search_term)
+    print(coun)
     f.write(data)
+    f.close()
 f=open("stuent.txt","r")
 replace_text("/home/ankit/bootcamp assign/TTN_Bootcamp_Assignment/file opening/stuent.txt",
              "Anurag","shahsank",False)

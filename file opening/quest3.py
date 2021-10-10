@@ -11,11 +11,11 @@ class Student:
     def file_read(self):
         f=open("stuent.txt","r")
         data=f.readlines()
-        print(data)
+        return data
 student1=Student("Anurag",100,"math")
 student2=Student("Arpit",101,"Hindi")
 student3=Student("Anand",102,"Science")
 student1.file_save()
 student2.file_save()
 student3.file_save()
-student1.file_read()
+print(student1.file_read())
