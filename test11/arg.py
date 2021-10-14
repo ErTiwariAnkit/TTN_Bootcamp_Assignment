@@ -1,6 +1,14 @@
-# Complete code
-import sys
-import datetime
+import mysql.connector
+connec=mysql.connector.connect(user='root',password='password',host='localhost',database='db')
+print(connec.is_connected())
+sql="create table tble2 (task_id int NOT NULL AUTO_INCREMENT,task_title varchar(255),create_at date,completed_at date,status varchar(255),PRIMARY KEY (task_id))"
+myc=connec.cursor()
+myc.execute(sql)
+for d in myc:
+    print(d)
+myc.close()
+connec.close()
+""""""
 def help1():
     sa = """Usage :-
 $ ./todo add "todo item" # Add a new todo
@@ -10,19 +18,51 @@ $ ./todo done NUMBER	 # Complete a todo
 $ ./todo help			 # Show usage
 $ ./todo report		 # Statistics"""
     sys.stdout.buffer.write(sa.encode('utf8'))
-def add(s):
-    f = open('todo.txt', 'a')
+
+    """
+    f = open(f'{title}', 'a')
     f.write(s)
+    f.write(" create at ")
+    f.write(str(datetime.datetime.today()).split()[0])
     f.write("\n")
     f.close()
     s = '"' + s + '"'
-    print(f"Added todo: {s}")
-def ls():
+    print(f"Added todo: {s}")"""
+def edit_title(id,s):
+    nec()
+    f=open("todo.txt","wt")
+    d.update({int(id):s})
+    data=str(d)
+    for i in d:
+        f.write(d[i])
+        f.write("\n")
+
+
+
+def list_todo():
+    print("hello")
+ """myc = connec.cursor()
+    sql = "show tables"
+    myc = connec.cursor()
+    #print("hello2")
+    myc.execute(sql)
+
+    list1=[]
+    for i in myc:
+        list1.append(str(i[0]))
+    print("1",connec.is_connected())
+    for i in list1:
+        connec2 = mysql.connector.connect(user='root', password='password', host='localhost', database='db')
+        myc2 = connec2.cursor()
+        print("2",connec2.is_connected())
+        myc2.execute(f"desc {i}")
+        for j in myc2:
+            print(j)
     try:
         nec()
         l = len(d)
+        print(d)
         k = l
-
         for i in d:
             sys.stdout.buffer.write(f"[{l}] {d[l]}".encode('utf8'))
             sys.stdout.buffer.write("\n".encode('utf8'))
@@ -30,7 +70,16 @@ def ls():
 
     except Exception as e:
         raise e
-def deL(no):
+    """
+def list_complete():
+    nec()
+    nf=open("done.txt","r")
+    print(nf.readlines())
+def list_incomplete():
+    nec()
+    nf=open("todo.txt","r")
+    print(nf.readlines())
+def delete(no):
     try:
         no = int(no)
         nec()
@@ -45,7 +94,7 @@ def deL(no):
 
     except Exception as e:
         print(f"Error: todo #{no} does not exist. Nothing deleted.")
-def done(no):
+def edit_status(no):
     try:
         nec()
         no = int(no)
@@ -54,7 +103,7 @@ def done(no):
         f.write(st)
         f.write("\n")
         f.close()
-        print(f"Marked todo #{no} as done.")
+        print(f"Marked todo #{no} as done.completed at {datetime.datetime.today()}")
 
         with open("todo.txt", "r+") as f:
             lines = f.readlines()
@@ -65,8 +114,6 @@ def done(no):
             f.truncate()
     except:
         print(f"Error: todo #{no} does not exist.")
-
-
 def report():
     nec()
     try:
@@ -94,38 +141,3 @@ def nec():
             c = c + 1
     except:
         sys.stdout.buffer.write("There are no pending todos!".encode('utf8'))
-
-
-if __name__ == '__main__':
-    try:
-        p="hello"
-        d = {}
-        don = {}
-        args = sys.argv
-        if (args[1] == 'del'):
-            args[1] = 'deL'
-        if (args[1] == 'add' and len(args[2:]) == 0):
-            sys.stdout.buffer.write(
-                "Error: Missing todo string. Nothing added!".encode('utf8'))
-
-        elif (args[1] == 'done' and len(args[2:]) == 0):
-            sys.stdout.buffer.write(
-                "Error: Missing NUMBER for marking todo as done.".encode('utf8'))
-
-        elif (args[1] == 'deL' and len(args[2:]) == 0):
-            sys.stdout.buffer.write(
-                "Error: Missing NUMBER for deleting todo.".encode('utf8'))
-        else:
-            globals()[args[1]](*args[2:])
-
-    except Exception as e:
-
-        s = """Usage :-
-$ ./todo add "todo item" # Add a new todo
-$ ./todo ls			 # Show remaining todos
-$ ./todo del NUMBER	 # Delete a todo
-$ ./todo done NUMBER	 # Complete a todo
-$ ./todo help			 # Show usage
-$ ./todo report		 # Statistics"""
-        sys.stdout.buffer.write(s.encode('utf8'))
-
