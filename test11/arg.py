@@ -1,14 +1,17 @@
 import mysql.connector
-connec=mysql.connector.connect(user='root',password='password',host='localhost',database='db')
+
+connec = mysql.connector.connect(user='root', password='password', host='localhost', database='db')
 print(connec.is_connected())
-sql="create table tble2 (task_id int NOT NULL AUTO_INCREMENT,task_title varchar(255),create_at date,completed_at date,status varchar(255),PRIMARY KEY (task_id))"
-myc=connec.cursor()
+sql = "create table tble2 (task_id int NOT NULL AUTO_INCREMENT,task_title varchar(255),create_at date,completed_at date,status varchar(255),PRIMARY KEY (task_id))"
+myc = connec.cursor()
 myc.execute(sql)
 for d in myc:
     print(d)
 myc.close()
 connec.close()
 """"""
+
+
 def help1():
     sa = """Usage :-
 $ ./todo add "todo item" # Add a new todo
@@ -28,57 +31,66 @@ $ ./todo report		 # Statistics"""
     f.close()
     s = '"' + s + '"'
     print(f"Added todo: {s}")"""
-def edit_title(id,s):
+
+
+def edit_title(id, s):
     nec()
-    f=open("todo.txt","wt")
-    d.update({int(id):s})
-    data=str(d)
+    f = open("todo.txt", "wt")
+    d.update({int(id): s})
+    data = str(d)
     for i in d:
         f.write(d[i])
         f.write("\n")
 
 
-
 def list_todo():
     print("hello")
- """myc = connec.cursor()
-    sql = "show tables"
-    myc = connec.cursor()
-    #print("hello2")
-    myc.execute(sql)
 
-    list1=[]
-    for i in myc:
-        list1.append(str(i[0]))
-    print("1",connec.is_connected())
-    for i in list1:
-        connec2 = mysql.connector.connect(user='root', password='password', host='localhost', database='db')
-        myc2 = connec2.cursor()
-        print("2",connec2.is_connected())
-        myc2.execute(f"desc {i}")
-        for j in myc2:
-            print(j)
-    try:
-        nec()
-        l = len(d)
-        print(d)
-        k = l
-        for i in d:
-            sys.stdout.buffer.write(f"[{l}] {d[l]}".encode('utf8'))
-            sys.stdout.buffer.write("\n".encode('utf8'))
-            l = l - 1
 
-    except Exception as e:
-        raise e
-    """
+"""myc = connec.cursor()
+   sql = "show tables"
+   myc = connec.cursor()
+   #print("hello2")
+   myc.execute(sql)
+
+   list1=[]
+   for i in myc:
+       list1.append(str(i[0]))
+   print("1",connec.is_connected())
+   for i in list1:
+       connec2 = mysql.connector.connect(user='root', password='password', host='localhost', database='db')
+       myc2 = connec2.cursor()
+       print("2",connec2.is_connected())
+       myc2.execute(f"desc {i}")
+       for j in myc2:
+           print(j)
+   try:
+       nec()
+       l = len(d)
+       print(d)
+       k = l
+       for i in d:
+           sys.stdout.buffer.write(f"[{l}] {d[l]}".encode('utf8'))
+           sys.stdout.buffer.write("\n".encode('utf8'))
+           l = l - 1
+
+   except Exception as e:
+       raise e
+   """
+
+
 def list_complete():
     nec()
-    nf=open("done.txt","r")
+    nf = open("done.txt", "r")
     print(nf.readlines())
+
+
 def list_incomplete():
     nec()
-    nf=open("todo.txt","r")
+    nf = open("todo.txt", "r")
     print(nf.readlines())
+
+
 def delete(no):
     try:
         no = int(no)
@@ -94,6 +106,8 @@ def delete(no):
 
     except Exception as e:
         print(f"Error: todo #{no} does not exist. Nothing deleted.")
+
+
 def edit_status(no):
     try:
         nec()
@@ -114,6 +128,8 @@ def edit_status(no):
             f.truncate()
     except:
         print(f"Error: todo #{no} does not exist.")
+
+
 def report():
     nec()
     try:
