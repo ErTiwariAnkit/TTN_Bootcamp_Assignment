@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5206f1b-d04d-48d7-974c-0ef22a66d30b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../todolist/arg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../todolist/done.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../todolist/todo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../todolist/todo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../todolist/todo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../todolist/todo.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../todolist/todo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../todolist/todonew.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,5 +104,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
