@@ -1,0 +1,330 @@
+login app Views.py------
+def login_page(request):
+    if request.method=='POST':
+        user=request.POST.get('u')
+        upassword=request.POST.get('p')
+        print(user,upassword)
+        if user!="" and upassword!="":
+            user=authenticate(username=user,password=upassword)
+            if user!=None:
+                login(request,user)
+                print(user,upassword)
+                return redirect('function1')
+    return render(request,'login.html')
+    
+    
+    
+    
+url and views------------------------------------------ 
+    Module Introduction
+
+Creating a New Project
+
+What are URLs & Views?
+
+Creating a First View & URL
+
+Adding More Views & URLs
+
+Dynamic Path Segments & Captured Values
+
+Path Converters
+
+Adding More Dynamic View Logic
+
+Redirects
+
+The Reverse Function & Named URLs
+
+Returning HTML
+
+Practicing URLs, Views & Dynamic View Logic
+
+Summary
+day 2---------------------------------------------------------
+template and static file
+Module Introduction
+
+Adding & Registering Templates
+
+Rendering Templates
+
+Template Language & Variable Interpolation
+
+Exercise Solution
+
+Filters
+
+The Django Visual Studio Code Extension
+
+Tags & the "for" Tag
+
+The URL Tag for Dynamic URLs
+
+The "if" Tag for Conditional Content
+
+Template Inheritance
+
+Including Partial Template Snippets
+
+More on the Django Template Language (DTL)
+
+404 Templates
+
+Adding Static Files
+
+Adding Global Static Files
+
+Adding CSS Styling
+
+Building Static URLs Dynamically
+
+Summary
+
+Useful Resources & Links
+day 3------------------------------------
+Section with title "Course Project: Building a Blog - The Basics" 
+day 4-----------------------------------------------------
+data and model-----------------------------
+Module Introduction
+
+Different Kinds of Data
+
+Understanding Database Options
+
+Understanding SQL
+
+Django Models
+
+Creating a Django Model with Fields
+
+Migrations
+
+Inserting Data
+
+Getting all Entries
+
+Updating Models & Migrations
+
+Blank vs Null
+
+Updating Data
+
+Deleting Data
+
+Create Instead of Save
+
+Querying & Filtering Data
+
+"or" Conditions
+
+Query Performance
+
+Bulk Operations
+
+Preparing Templates
+
+Rendering Queried Data in the Template
+
+Rendering the Details Page
+
+Model URLs
+
+Adding a Slugfield & Overwriting Save
+
+Using the Slug & Updating Field Options
+
+Aggregation & Ordering
+
+Summary
+day 5--------------------
+Admin and model relationship---------------
+Module Introduction
+
+Logging Data Into the Admin Panel
+
+Adding Models to the Admin Area
+
+Configuring Model Fields
+
+Configuring the Admin Settings
+
+More Config Options
+
+Useful Resources & Links
+
+Relationships-----------
+
+Module Introduction
+
+Understanding Relationship Types
+
+Adding a one-to-many Relation & Migrations
+
+Working with Relations in Python Code
+
+Cross Model Queries
+
+Managing Relations in Admin
+
+Adding a one-to-one Relation
+
+One-to-one Python Code
+
+One-to-one & Admin Config
+
+Setting-up many-to-many
+
+Using many-to-many in Python
+
+Many-to-many in Admin
+
+Circular Relations & Lazy Relations
+
+Summary
+
+Useful Resources & Links
+
+Course Project
+
+Module Introduction
+
+Planning the Data Models
+
+Adding a Post Model
+
+Author Model & one-to-many
+
+Tag Model many-to-many
+
+Registering Models for Admin
+
+Migrations & Admin Login
+
+Adding Data via Admin
+
+Configuring the Admin Panel
+
+Fetching Posts for Starting Page
+
+All Post & Single Post Pages
+
+Using Author & Tags Data
+
+Summary
+day 6 ---------------------------------------
+form----------------------
+Module Introduction
+
+Starting Setup
+
+Adding a Dummy Form
+
+Get & Post Requests
+
+CSRF Protection
+
+Handling Form Submission & Extracting Data
+
+Manual Form Validation & the Problems with "that"
+
+Using the Django Form Class
+
+Validation with Django Forms
+
+Customizing the Form Controls
+
+Customizing the Rendered HTML
+
+Adding Styling
+
+Adding More Form Controls
+
+Storing Form Data in a Database
+
+Introducing Modelforms
+
+Configuring the Modelform
+
+Saving Data with a Modelform
+
+Class Based Views
+
+Summary
+
+Useful Resources & Links
+day 7--------------------------------------
+Class Views----------------------
+file upload----------
+session-----------
+Module Introduction
+
+Adding Templates
+
+TemplateView
+
+Using the TemplateView
+
+Showing a Detail Template
+
+The ListView
+
+DetailView
+
+When to Use Which View
+
+FormView
+
+CreateView
+
+Useful Resources & Links
+
+File Uploads
+
+Module Introduction
+
+Starting Setup
+
+Making the File Upload Work
+
+Storing Uploaded Files Naive Approach
+
+Adding a Form with a Filefield
+
+Using Models for File Storage
+
+Using an Imagefield
+
+Using a CreateView
+
+Working with the File Field
+
+Serving Uploaded Files
+
+Summary
+
+Useful Resources & Links
+
+Sessions
+
+Module Introduction
+
+Problem Description
+
+What are Sessions?
+
+Enabling & Configuring Sessions
+
+Adding a New View
+
+Storing Data in Sessions
+
+Which Kind of Data Should be Stored
+
+Using Session Data
+
+Safely Accessing Session Data
+
+Summary?
+day 8------------------------------------------
+Section with Title "Deployment"

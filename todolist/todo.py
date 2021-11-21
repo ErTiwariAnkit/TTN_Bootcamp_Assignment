@@ -6,7 +6,8 @@ import mysql.connector
 class Todo:
     def __init__(self):
         try:
-            self.connec = mysql.connector.connect(user='root', password='password', host='localhost', database='todo')
+            self.connection = mysql.connector.connect(user='root', password='password', host='localhost',
+                                                      database='todo')
             parser = argparse.ArgumentParser()
             parser.add_argument("--list", nargs='?', help="list of all tasks", const='list')  # nargs=? 0 or 1 argument
             parser.add_argument("--create", nargs='?', help="create new task", const=True)
@@ -29,7 +30,7 @@ class Todo:
                     self.list_todo()
 
                 else:
-                    print("you give wrong argument!please Enter any one from this:'complete'/'incomplete'")
+                    print("you given wrong argument!please Enter any one from this:'complete'/'incomplete'")
 
             elif args.create:  # create title
                 try:
@@ -41,7 +42,7 @@ class Todo:
                 try:
                     self.edit_title(args.argument_title[0], args.argument_title[1])
                 except:
-                    print("task already exist")
+                    print("task already exist in todo try with different title")
             elif args.argument_status:  # edit task status
                 self.edit_status(args.argument_status[0], args.argument_status[1])
 
@@ -76,35 +77,35 @@ class Todo:
               "list of incomplete task:---->--list incomplete")
 
     def create_title(self, task_title):
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         sql = f"INSERT INTO todo_table (task_title,created_at) VALUES ('{task_title}','{datetime.datetime.today()}');"
         myc.execute(sql)
         print("New Task Successfully Created")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def edit_title(self, id, new_task_title):
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         sql = f"UPDATE todo_table SET task_title ='{new_task_title}' where task_id='{id}';"
         myc.execute(sql)
         print(f"title edited : New title for id {id}: '{new_task_title}'")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def edit_task(self, id, new_task_title):
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         sql = f"UPDATE todo_table SET task_title ='{new_task_title}' where task_id='{id}';"
         myc.execute(sql)
         sql = f"UPDATE todo_table SET status ='complete' where task_id='{id}';"
         myc.execute(sql)
-        sql = f"UPDATE todo_table SET completed_at='{datetime.datetime.today()}';"
+        sql = f"UPDATE todo_table SET completed_at='{datetime.datetime.today()}' where task_id='{id}';"
         myc.execute(sql)
         print(f"Task edited and mark as COMPLETED :New task title --->{new_task_title}")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def edit_status(self, id, new_task_status):
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         sql = f"UPDATE todo_table SET status ='{new_task_status}' where task_id='{id}';"
         myc.execute(sql)
         if new_task_status == "complete":
@@ -114,12 +115,12 @@ class Todo:
             sql = f"UPDATE todo_table SET completed_at=NULL where task_id='{id}';"
             myc.execute(sql)
         print(f"task edited :new task status--->{new_task_status}")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def search_task(self, task_title):
         sql = f"select * from todo_table where task_title='{task_title}'"
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         myc.execute(sql)
         not_found = True
         for i in myc:
@@ -128,11 +129,11 @@ class Todo:
             not_found = False
         if not_found:
             print(f"task title {task_title}: Not found")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def delete(self, id):
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         myc.execute(f"select * from todo_table where task_id='{id}';")
         found = False
         for i in myc:
@@ -142,15 +143,15 @@ class Todo:
         if found:
             sql = f"DELETE FROM todo_table where task_id='{id}';"
             myc.execute(sql)
-            self.connec.commit()
-            self.connec.close()
+            self.connection.commit()
+            self.connection.close()
         else:
-            print("task already deleted or task not exist")
+            print("task already deleted or task does not exist")
 
     def list_todo(self):
-        print("list of all task :")
+        print("list of all tasks :")
         sql = "select * from todo_table"
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         myc.execute(sql)
         no = 1
         for i in myc:
@@ -158,13 +159,13 @@ class Todo:
             no = no + 1
         if no == 1:
             print("there are no task")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def complete(self):
         print("complete task :")
         sql = "select * from todo_table where status='complete'"
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         myc.execute(sql)
         no = 1
         for i in myc:
@@ -172,13 +173,13 @@ class Todo:
             no = no + 1
         if no == 1:
             print("there are no complete task")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def incomplete(self):
         print("incomplete task :")
         sql = "select * from todo_table where status='incomplete'"
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         myc.execute(sql)
         no = 1
         for i in myc:
@@ -186,12 +187,12 @@ class Todo:
             no = no + 1
         if no == 1:
             print("there are no incomplete task")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
     def list_date(self):
         sql = "select task_title,created_at,completed_at from todo_table"
-        myc = self.connec.cursor()
+        myc = self.connection.cursor()
         myc.execute(sql)
         no = 1
         for i in myc:
@@ -199,8 +200,8 @@ class Todo:
             no = no + 1
         if no == 1:
             print("there are no task")
-        self.connec.commit()
-        self.connec.close()
+        self.connection.commit()
+        self.connection.close()
 
 
 if __name__ == '__main__':

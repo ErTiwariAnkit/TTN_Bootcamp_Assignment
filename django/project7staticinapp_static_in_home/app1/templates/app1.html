@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>app1 page titile</title>
+</head>
+<body>
+    <ul>
+        <li><a href="/">Home page</a></li>
+        <li><a href="{% url 'function2'%}">app 2 page</a></li>
+        <li><a href="{% url 'app'%}">app 3 page</a></li>
+    </ul>
+    <h1>app1 page by django</h1>
+    {% if stu %}
+     <h1>show data stu</h1>
+     <h1>{{stu}}</h1>
+     <table>
+         <tr>
+             <th>id</th>
+             <th>stuname</th>
+             <th>stuemail</th>
+             <th>stupass</th>
+         </tr>
+     <tr>
+         <td>{{stu.stuid}}</td>
+        <td>{{stu.stuname}}</td>
+        <td>{{stu.stuemail}}</td>
+        <td>{{stu.stupass}}</td>
+     </tr>
+     </table>
+    {% else %}
+     <h1>no data aviliable</h1>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/"/>
+    <meta charset="UTF-8">
+    <title>Learning | Dashboard</title>
+    <link rel="shortcut icon" href="/assets/favicon-c06e02ee158e94e25e754cb87a2328fd.ico" type="image/x-icon">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- FontAwesome 4.3.0 -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Ionicons 2.0.0 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Selectize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+    <link rel="stylesheet" href="/assets/bootcamp-57e469c81b255a7b904f467b60edcb76.css"/>
+    <link rel="stylesheet" href="/assets/autocomplete-4e670ff9ad8e04119438c117dff104e6.css"/>
+</head>
+<toast></toast>
+
+<body ng-app="bootcamp" class="hold-transition skin-blue layout-top-nav" ng-controller="loginCtrl">
+<div class="wrapper" ng-cloak>
+
+    <header class="main-header">
+        <!-- Logo -->
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-header">
+                <a ui-sref="events" class="navbar-brand">
+                    <b>Learning</b></a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="collapse navbar-collapse  pull-left" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    
+                        <li>
+                            <a ui-sref="userDashBoard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a ui-sref="events"><i class="fa fa-calendar"></i> <span>Events</span></a>
+                        </li>
+                        <li>
+                            <a ui-sref="performance"><i class="fa fa-line-chart"></i> <span>Performance</span></a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-laptop"></i>&nbsp;Trainings<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a ui-sref="topicList">
+                                        <i class="fa fa-comments-o"></i>&nbsp;Topics
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" ui-sref="courseList">
+                                        <i class="fa fa-book"></i> <span>Courses</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" ui-sref="getAllSessionList">
+                                        <i class="fa fa-bullhorn"></i> <span>Sessions</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    
+                    
+
+                    
+
+                    
+                </ul>
+            </div>
+
+            
+                <div class="navbar-custom-menu pull-right">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void 0">
+                                <img ng-src="{{user.photo}}" class="user-image" alt="User Image"/>
+                                <span class="hidden-xs">{{user.username}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li class="user-header">
+                                    <img ng-src="{{user.photo}}" class="img-circle" alt="User Image"/>
+
+                                    <p id="username">{{user.username}}
+                                        
+                                            <small>{{userPractice}}</small>
+                                        
+                                    </p>
+                                </li>
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <a ui-sref="profile({id: user.id})"><i
+                                                    class="fa fa-user"></i><span>&nbsp;Profile</span></a>
+                                        </div>
+
+                                        <div class="col-xs-6">
+                                            <a href="javascript:void(0)" ng-click="logout()">
+                                                <i class="fa fa-power-off"></i> Sign out 
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            
+
+        </nav>
+    </header>
+    <!-- Modal for Login-->
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-tools">
+                    <a href="#" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                </div>
+            </div>
+
+            <div class="tabbable">
+                
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                        <li><a href="#register" data-toggle="tab">Sign Up</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="login">
+                            <form action="/j_spring_security_check" method='POST' class='cssform form-horizontal' id="loginForm" name="loginForm">
+    <div class="box-body">
+
+        <div class="col-sm-6 text-center">
+            <a href="/login/auth" class="btn btn-google-plus btn-lg">
+                <span class="fa fa-google-plus">
+                    &nbsp;Login with tothenew.com
+                </span>
+            </a>
+        </div>
+        
+            <div class="col-sm-6">
+
+                <div class="form-group">
+                    <b>Username: <span class="red-alert">*</span></b>
+
+                    <input type="text" class="form-control text_" name="j_username" id="username" value="" />
+                </div>
+
+                <div class="form-group">
+                    <b>Password: <span class="red-alert">*</span></b>
+
+                    <input type="password" class="form-control text_" name="j_password" id="password" value="" />
+                </div>
+
+            </div>
+        
+    </div>
+    
+
+        <div class="box-footer">
+            <a href="#" class="pull-left" data-target="#forgotpassword" data-toggle="modal"><ins>Forgot Password</ins></a>
+
+            <div class="btn-group pull-right">
+                <input type="submit" name="Login" id="submit" value="Login" class="btn btn-primary btn-sm" />
+            </div>
+        </div>
+    
+
+</form>
+<script>
+
+</script>
+                        </div>
+                        
+                            <div class="tab-pane" id="register">
+                                <div class="box-body">
+
+    <form action="/user/register/registrationForm" method="post" name="registrationForm" class="cssform form-horizontal" id="registrationForm" >
+        <div class="form-group">
+            <label class="control-label col-sm-3">First Name: <span class="red-alert">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text" name="firstName" id="firstName" class="form-control" required="required" value="" />
+            </div>
+
+            <div class="alert-danger"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Last Name: <span class="red-alert">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text" name="lastName" id="lastName" class="form-control" value="" />
+            </div>
+
+            <div class="alert-danger"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Phone Number: <span class="red-alert">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" value="" />
+            </div>
+
+            <div class="alert-danger"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Email: <span class="red-alert">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text" name="email" id="email" class="form-control" value="" />
+            </div>
+
+            <div class="alert-danger"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Password: <span class="red-alert">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="password" name="password" id="password" class="form-control" value="" />
+            </div>
+
+            <div class="alert-danger"></div>
+        </div>
+
+        <div class="box-footer">
+            <a href="#" data-target="#forgotpassword" data-toggle="modal" class="pull-left"><ins>Forgot Password</ins></a>
+
+            <div class="pull-right">
+                <input type="submit" name="_action_register" value="Register" id="submit" class="btn btn-primary btn-sm" />
+            </div>
+
+        </div>
+    </form>
+</div>
+
+                            </div>
+                        
+                    </div>
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="forgotpassword" class="modal fade">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Forgot Password</h4>
+            </div>
+        <div class="modal-body">
+        <!--Form Opening-->
+            <form action="/user/forgotPassword/forgotPassword" method="post" class="form-horizontal" name="forgotPassword" id="forgotPassword" >
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Email:  <span class="red-alert">*</span></label>
+
+                    <div class="col-sm-6">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Email-ID" value="" />
+                    </div>
+                    <div class="alert-danger"> </div>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                    
+                    <input type="submit" name="_action_forgotPassword" value="Send Password" class="btn btn-primary btn-sm" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        <!--Form Closing-->
+        </div>
+    </div>
+</div>
+<!-- Modal close-->
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <script src="/assets/underscore-min-5224d253d572640bd12c2ac6bcbd5811.js" type="text/javascript" ></script>
+    <script src="/assets/application-8b87991f0a4615099534a7ba939c2793.js" type="text/javascript" ></script>
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="/assets/directive-c629e30e65ceba80cc38cd248fe85d79.js" type="text/javascript" ></script>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="content">
+            
+
+
+            
+<div ui-view></div>
+
+<script>
+    $(document).on("click", ".openSidebar", function () {
+        $(".control-sidebar").addClass("control-sidebar-open")
+    });
+</script>
+
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <a href="mailto:uday.singh@tothenew.com" target="_top">Contact Us</a>
+        </div>
+        <strong>Copyright &copy; 2017-2018 <a href="http://tothenew.com" target="_blank">TO THE NEW</a>.
+        </strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
+
+</div>
+
+
+</body>
+
+</html>
